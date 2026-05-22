@@ -96,6 +96,45 @@ chown -R www-data:www-data /var/www/pterodactyl/.*
 
 ---
 
+## Upgrading / Migrating from Official Pterodactyl
+
+If you already have a working Pterodactyl panel installed and want to switch to **alxzen** without losing your data, database, or `.env` file, use the following sequence:
+
+```bash
+cd /var/www/pterodactyl
+php artisan down
+
+# Backup your existing .env and other crucial files
+cp .env ../.env.backup
+# Optional: backup the whole directory just in case
+# cp -r /var/www/pterodactyl /var/www/pterodactyl_backup
+
+# Remove old files (excluding storage and .env)
+rm -rf app bootstrap config database public resources routes tests .editorconfig .env.example .eslintignore .eslintrc.js .gitattributes .gitignore .prettierignore .prettierrc artisan babel.config.js composer.json composer.lock jest.config.js package.json phpstan.neon postcss.config.js SECURITY.md tailwind.config.js tsconfig.json webpack.config.js yarn.lock
+
+# Download and extract the alxzen release (assuming a release tar.gz is provided, or clone over it)
+# Since alxzen is a full fork, you can download the tar.gz from the GitHub release tab:
+curl -L https://github.com/alxzy-group/alxzen/releases/latest/download/panel.tar.gz | tar -xzv
+
+# Ensure your .env is intact (it wasn't deleted in the rm command above, but just in case)
+# cp ../.env.backup .env
+
+# Install Dependencies
+composer install --no-dev --optimize-autoloader
+yarn install
+yarn build:production
+
+# Finalize
+php artisan view:clear && php artisan config:clear
+php artisan migrate --force
+chown -R www-data:www-data /var/www/pterodactyl/*
+chown -R www-data:www-data /var/www/pterodactyl/.*
+php artisan up
+php artisan queue:restart
+```
+
+---
+
 ## Installing Wings (alxzen Fork)
 
 *(Segera hadir: Instruksi khusus untuk instalasi Wings fork dari alxzen)*
