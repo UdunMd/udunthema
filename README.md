@@ -123,7 +123,7 @@ rm -rf app bootstrap config database public resources routes tests \
   tailwind.config.js tsconfig.json webpack.config.js yarn.lock
 
 # ── STEP 3: Download & extract release alxzen ────────────────────────────────
-curl -L https://github.com/alxzy-group/alxzen/archive/refs/heads/main.tar.gz | tar -xzv --strip-components=1
+curl -L https://github.com/alxzy-group/alxzen/releases/latest/download/panel.tar.gz | tar -xzv --strip-components=1
 
 # ── STEP 4: Restore .env dari backup ─────────────────────────────────────────
 # WAJIB! Release baru membawa .env.example — restore konfigurasi lamamu.
