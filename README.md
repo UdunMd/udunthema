@@ -73,30 +73,22 @@ composer install --no-dev --optimize-autoloader
 yarn install
 yarn build:production
 
-# Environment Configuration
-php artisan key:generate --force
+# Environment Configuration -- Edit .env dulu sebelum lanjut!
+cp .env.example .env
+nano .env  # Isi: APP_URL, DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD
 ```
 
-### 3. Finalization
+### 3. Finalization - Cukup 1 Perintah
 
-Before finalizing, edit your `.env` file (`nano .env`) and configure your database details (using the password `YOUR_PASSWORD_HERE` you created earlier), Redis, and App URL.
+Jalankan setup script yang otomatis mengurus: validasi APP_URL, clear cache, migrasi DB, set permissions, dan rebuild cache.
 
 ```bash
-# Database setup and Permissions
-php artisan view:clear && php artisan config:clear
-php artisan migrate --seed --force
+# Setup otomatis -- validasi config, migrasi, cache, permissions
+bash setup.sh
 
-# Create First Admin User
+# Buat akun admin pertama
 php artisan p:user:make
-
-# Set Permissions
-chown -R www-data:www-data /var/www/pterodactyl/*
-chown -R www-data:www-data /var/www/pterodactyl/.*
-
-# Route cache & optimization (compatible since v2.1)
-php artisan optimize
 ```
-
 *(Note: Don't forget to configure your Nginx virtual host and crontab as per the standard Pterodactyl documentation).*
 
 ---
