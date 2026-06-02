@@ -292,7 +292,7 @@ install_panel_composer() {
     print_step "Installing Composer Dependencies (no-dev)"
 
     cd "$PANEL_DIR"
-    COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction 2>&1 | tail -3
+    COMPOSER_ALLOW_SUPERUSER=1 php -d memory_limit=-1 /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction
 
     print_ok "Composer dependencies installed."
 }
