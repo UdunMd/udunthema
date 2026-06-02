@@ -230,8 +230,8 @@ install_panel_dependencies() {
 configure_database() {
     print_step "Configuring MariaDB Database"
 
-    # Generate secure random password
-    DB_PASS=$(tr -dc 'A-Za-z0-9!@#$%' </dev/urandom | head -c 32)
+    # Generate secure random password (alphanumeric only to avoid .env parsing issues with #)
+    DB_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32)
 
     # Start MariaDB if not running
     systemctl enable --now mariadb 2>/dev/null
@@ -274,7 +274,7 @@ configure_environment() {
 
     # Ensure APP_KEY exists so artisan key:generate works
     if ! grep -q "^APP_KEY=" .env; then
-        echo "APP_KEY=" >> .env
+        echo "APP_KEY=SomeRandomString3232323232323232" >> .env
     fi
 
     local app_url
