@@ -174,8 +174,12 @@ install_panel_dependencies() {
 
     apt-get update -y -qq
     apt-get upgrade -y -qq
-    apt-get install -y -qq software-properties-common curl apt-transport-https \
+    apt-get install -y -qq curl apt-transport-https \
         ca-certificates gnupg tar unzip git wget lsb-release
+    
+    if [ "$OS" == "ubuntu" ]; then
+        apt-get install -y -qq software-properties-common
+    fi
     print_ok "Base packages installed."
 
     # ── PHP 8.3 Repository ──
