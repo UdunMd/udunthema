@@ -302,7 +302,7 @@ install_panel_composer() {
 
     cd "$PANEL_DIR"
     rm -f composer.lock
-    COMPOSER_ALLOW_SUPERUSER=1 php -d memory_limit=-1 /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction
+    COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_NO_AUDIT=1 php -d memory_limit=-1 /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction --no-audit
 
     print_ok "Composer dependencies installed."
 }

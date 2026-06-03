@@ -102,6 +102,9 @@
         "sort-packages": true,
         "platform": {
             "php": "8.2.0"
+        },
+        "audit": {
+            "abandoned": "ignore"
         }
     },
     "minimum-stability": "stable",
