@@ -35,12 +35,12 @@ export default () => {
             return {
                 ...opts,
                 label: !index ? 'Network In' : 'Network Out',
-                borderColor: !index ? theme('colors.cyan.400') : theme('colors.yellow.400'),
+                borderColor: !index ? theme('colors.indigo.400') : theme('colors.purple.400'),
                 backgroundColor: (context: any) => {
                     const ctx = context.chart.ctx;
                     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                    gradient.addColorStop(0, hexToRgba(!index ? theme('colors.cyan.500') : theme('colors.yellow.500'), 0.5));
-                    gradient.addColorStop(1, hexToRgba(!index ? theme('colors.cyan.500') : theme('colors.yellow.500'), 0.0));
+                    gradient.addColorStop(0, hexToRgba(!index ? theme('colors.indigo.500') : theme('colors.purple.500'), 0.5));
+                    gradient.addColorStop(1, hexToRgba(!index ? theme('colors.indigo.500') : theme('colors.purple.500'), 0.0));
                     return gradient;
                 },
             };
@@ -85,10 +85,10 @@ export default () => {
                 legend={
                     <>
                         <Tooltip arrow content={'Inbound'}>
-                            <CloudDownloadIcon className={'mr-2 w-4 h-4 text-yellow-400'} />
+                            <CloudDownloadIcon className={'mr-2 w-4 h-4 text-indigo-400'} />
                         </Tooltip>
                         <Tooltip arrow content={'Outbound'}>
-                            <CloudUploadIcon className={'w-4 h-4 text-cyan-400'} />
+                            <CloudUploadIcon className={'w-4 h-4 text-purple-400'} />
                         </Tooltip>
                     </>
                 }
