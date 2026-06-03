@@ -46,6 +46,11 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
     });
 });
 
+Route::group(['prefix' => '/announcements'], function () {
+    Route::get('/', [Client\AnnouncementsController::class, 'index']);
+    Route::post('/{id}/read', [Client\AnnouncementsController::class, 'markRead']);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Client Control API

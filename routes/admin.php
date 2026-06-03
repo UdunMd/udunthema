@@ -147,3 +147,10 @@ Route::group(['prefix' => 'expiration'], function () {
     Route::get('/', [Admin\ExpirationController::class, 'index'])->name('admin.expiration');
     Route::post('/{id}', [Admin\ExpirationController::class, 'update'])->name('admin.expiration.update');
 });
+
+Route::group(['prefix' => 'announcements'], function () {
+    Route::get('/', [Admin\AnnouncementController::class, 'index'])->name('admin.announcements');
+    Route::get('/new', [Admin\AnnouncementController::class, 'create'])->name('admin.announcements.new');
+    Route::post('/new', [Admin\AnnouncementController::class, 'store'])->name('admin.announcements.store');
+    Route::delete('/{id}', [Admin\AnnouncementController::class, 'destroy'])->name('admin.announcements.delete');
+});

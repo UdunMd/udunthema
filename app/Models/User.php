@@ -281,6 +281,14 @@ class User extends Model implements
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\AnnouncementRead, $this>
+     */
+    public function readAnnouncements(): HasMany
+    {
+        return $this->hasMany(AnnouncementRead::class);
+    }
+
+    /**
      * Returns all the servers that a user can access by way of being the owner of the
      * server, or because they are assigned as a subuser for that server.
      *
