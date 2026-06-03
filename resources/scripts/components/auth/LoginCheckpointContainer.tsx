@@ -30,7 +30,6 @@ const LoginCheckpointContainer = () => {
         <LoginFormContainer title={'Device Checkpoint'} css={tw`w-full flex`}>
             <div css={tw`mt-6`}>
                 <Field
-                    light
                     name={isMissingDevice ? 'recoveryCode' : 'code'}
                     title={isMissingDevice ? 'Recovery Code' : 'Authentication Code'}
                     description={
@@ -43,8 +42,14 @@ const LoginCheckpointContainer = () => {
                     autoFocus
                 />
             </div>
-            <div css={tw`mt-6`}>
-                <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
+            <div css={tw`mt-8`}>
+                <Button 
+                    size={'xlarge'} 
+                    type={'submit'} 
+                    disabled={isSubmitting} 
+                    isLoading={isSubmitting}
+                    css={tw`w-full bg-indigo-600 hover:bg-indigo-500 border-none shadow-[0_0_15px_rgba(79,70,229,0.3)] hover:shadow-[0_0_25px_rgba(79,70,229,0.5)] transition-all`}
+                >
                     Continue
                 </Button>
             </div>

@@ -63,12 +63,11 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
             {({ isSubmitting }) => (
                 <LoginFormContainer title={'Reset Password'} css={tw`w-full flex`}>
                     <div>
-                        <label>Email</label>
-                        <Input value={email} isLight disabled />
+                        <label css={tw`text-neutral-300 text-sm`}>Email</label>
+                        <Input value={email} disabled />
                     </div>
                     <div css={tw`mt-6`}>
                         <Field
-                            light
                             label={'New Password'}
                             name={'password'}
                             type={'password'}
@@ -76,10 +75,16 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                         />
                     </div>
                     <div css={tw`mt-6`}>
-                        <Field light label={'Confirm New Password'} name={'passwordConfirmation'} type={'password'} />
+                        <Field label={'Confirm New Password'} name={'passwordConfirmation'} type={'password'} />
                     </div>
-                    <div css={tw`mt-6`}>
-                        <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
+                    <div css={tw`mt-8`}>
+                        <Button 
+                            size={'xlarge'} 
+                            type={'submit'} 
+                            disabled={isSubmitting} 
+                            isLoading={isSubmitting}
+                            css={tw`w-full bg-indigo-600 hover:bg-indigo-500 border-none shadow-[0_0_15px_rgba(79,70,229,0.3)] hover:shadow-[0_0_25px_rgba(79,70,229,0.5)] transition-all`}
+                        >
                             Reset Password
                         </Button>
                     </div>
