@@ -169,58 +169,75 @@
                         </li>
                         @endif
 
-                        <li class="header">MANAGEMENT</li>
-                        
-                        {{-- DATABASE HANYA OWNER --}}
-                        @if(Auth::user()->id === 1)
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
-                            <a href="{{ route('admin.databases') }}">
-                                <i class="fa fa-database"></i> <span>Databases</span>
+                        <li class="treeview {{ starts_with(Route::currentRouteName(), ['admin.databases', 'admin.locations', 'admin.nodes']) ? 'active' : '' }}">
+                            <a href="#">
+                                <i class="fa fa-cogs"></i> <span>Management</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.locations') ?: 'active' }}">
-                            <a href="{{ route('admin.locations') }}">
-                                <i class="fa fa-globe"></i> <span>Locations</span>
-                            </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.nodes') ?: 'active' }}">
-                            <a href="{{ route('admin.nodes') }}">
-                                <i class="fa fa-sitemap"></i> <span>Nodes</span>
-                            </a>
-                        </li>
-                        @endif
+                            <ul class="treeview-menu">
+                                {{-- DATABASE HANYA OWNER --}}
+                                @if(Auth::user()->id === 1)
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
+                                    <a href="{{ route('admin.databases') }}">
+                                        <i class="fa fa-database"></i> <span>Databases</span>
+                                    </a>
+                                </li>
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.locations') ?: 'active' }}">
+                                    <a href="{{ route('admin.locations') }}">
+                                        <i class="fa fa-globe"></i> <span>Locations</span>
+                                    </a>
+                                </li>
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.nodes') ?: 'active' }}">
+                                    <a href="{{ route('admin.nodes') }}">
+                                        <i class="fa fa-sitemap"></i> <span>Nodes</span>
+                                    </a>
+                                </li>
+                                @endif
 
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.servers') ?: 'active' }}">
-                            <a href="{{ route('admin.servers') }}">
-                                <i class="fa fa-server"></i> <span>Servers</span>
-                            </a>
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.servers') ?: 'active' }}">
+                                    <a href="{{ route('admin.servers') }}">
+                                        <i class="fa fa-server"></i> <span>Servers</span>
+                                    </a>
+                                </li>
+                                
+                                {{-- EXPIRATION & USERS HANYA OWNER --}}
+                                @if(Auth::user()->id === 1)
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.expiration') ?: 'active' }}">
+                                    <a href="{{ route('admin.expiration') }}">
+                                        <i class="fa fa-clock-o"></i> <span>Expiration Manager</span>
+                                    </a>
+                                </li>
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.users') ?: 'active' }}">
+                                    <a href="{{ route('admin.users') }}">
+                                        <i class="fa fa-users"></i> <span>Users</span>
+                                    </a>
+                                </li>
+                                @endif
+                            </ul>
                         </li>
-                        
-                        {{-- EXPIRATION & USERS HANYA OWNER --}}
-                        @if(Auth::user()->id === 1)
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.expiration') ?: 'active' }}">
-                            <a href="{{ route('admin.expiration') }}">
-                                <i class="fa fa-clock-o"></i> <span>Expiration Manager</span>
-                            </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.users') ?: 'active' }}">
-                            <a href="{{ route('admin.users') }}">
-                                <i class="fa fa-users"></i> <span>Users</span>
-                            </a>
-                        </li>
-                        @endif
 
                         @if(Auth::user()->id === 1)
-                        <li class="header">SERVICE MANAGEMENT</li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.mounts') ?: 'active' }}">
-                            <a href="{{ route('admin.mounts') }}">
-                                <i class="fa fa-magic"></i> <span>Mounts</span>
+                        <li class="treeview {{ starts_with(Route::currentRouteName(), ['admin.mounts', 'admin.nests']) ? 'active' : '' }}">
+                            <a href="#">
+                                <i class="fa fa-server"></i> <span>Service Management</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.nests') ?: 'active' }}">
-                            <a href="{{ route('admin.nests') }}">
-                                <i class="fa fa-th-large"></i> <span>Nests</span>
-                            </a>
+                            <ul class="treeview-menu">
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.mounts') ?: 'active' }}">
+                                    <a href="{{ route('admin.mounts') }}">
+                                        <i class="fa fa-magic"></i> <span>Mounts</span>
+                                    </a>
+                                </li>
+                                <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.nests') ?: 'active' }}">
+                                    <a href="{{ route('admin.nests') }}">
+                                        <i class="fa fa-th-large"></i> <span>Nests</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         @endif
                     </ul>

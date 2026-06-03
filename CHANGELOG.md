@@ -3,6 +3,18 @@ This file is a running track of new features and fixes to each version of the pa
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
+## v3.3 (alxzen UI Overhaul)
+### Added
+* Announcements feature for admins to broadcast messages to users on the Dashboard and Console.
+* Glassmorphism aesthetics across Server Stats, File Manager, and Code Editor.
+* Admin Sidebar collapsible treeview dropdowns for Management and Service Management menus.
+
+### Changed
+* Removed horizontal SubNavigation bar in favor of the Hamburger menu for a cleaner layout.
+* Server File Manager UI upgraded with glowing hover effects and rounded corners.
+* Code Editor UI wrapper modernized with neon borders.
+* Wings container name prefixes updated from `pterodactyl~` to `alxzen~`.
+
 ## v3.0 (alxzen Big Update)
 ### Added
 * Standalone fork capability, separating entirely from Pterodactyl core dependency for installation.

@@ -11,7 +11,6 @@ import Spinner from '@/components/elements/Spinner';
 import { NotFound, ServerError } from '@/components/elements/ScreenBlock';
 import { httpErrorToHuman } from '@/api/http';
 import { useStoreState } from 'easy-peasy';
-import SubNavigation from '@/components/elements/SubNavigation';
 import InstallListener from '@/components/server/InstallListener';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -74,31 +73,7 @@ export default () => {
             ) : (
                 <>
                     <CSSTransition timeout={150} classNames={'fade'} appear in>
-                        <SubNavigation>
-                            <div>
-                                {routes.server
-                                    .filter((route) => !!route.name)
-                                    .map((route) =>
-                                        route.permission ? (
-                                            <Can key={route.path} action={route.permission} matchAny>
-                                                <NavLink to={to(route.path, true)} exact={route.exact}>
-                                                    {route.name}
-                                                </NavLink>
-                                            </Can>
-                                        ) : (
-                                            <NavLink key={route.path} to={to(route.path, true)} exact={route.exact}>
-                                                {route.name}
-                                            </NavLink>
-                                        )
-                                    )}
-                                {rootAdmin && (
-                                    // eslint-disable-next-line react/jsx-no-target-blank
-                                    <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
-                                        <FontAwesomeIcon icon={faExternalLinkAlt} />
-                                    </a>
-                                )}
-                            </div>
-                        </SubNavigation>
+                        <div />
                     </CSSTransition>
                     <InstallListener />
                     <TransferListener />

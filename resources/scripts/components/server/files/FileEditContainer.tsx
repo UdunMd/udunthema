@@ -110,7 +110,7 @@ export default () => {
                     save(name);
                 }}
             />
-            <div css={tw`relative`}>
+            <div css={tw`relative rounded-xl overflow-hidden border border-white/5 shadow-2xl transition-all duration-300 hover:border-indigo-500/30 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]`}>
                 <SpinnerOverlay visible={loading} />
                 <CodemirrorEditor
                     mode={mode}

@@ -15,14 +15,28 @@
 }
 
 .file_row {
-    @apply flex items-center cursor-pointer bg-neutral-700 rounded-sm mb-px text-sm no-underline;
-    @apply hover:text-neutral-100 hover:bg-neutral-600;
+    @apply flex items-center cursor-pointer mb-2 text-sm no-underline transition-all duration-300;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    
+    &:hover {
+        background-color: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
 
     & > .details {
-        @apply flex flex-1 items-center text-neutral-300 no-underline px-4 py-2 overflow-hidden truncate;
+        @apply flex flex-1 items-center text-gray-300 no-underline px-4 py-3 overflow-hidden truncate transition-colors duration-200;
 
         &:not(a) {
             @apply cursor-default;
         }
+    }
+    
+    &:hover > .details {
+        @apply text-white;
     }
 }
