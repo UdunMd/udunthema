@@ -10,6 +10,7 @@ import StatGraphs from '@/components/server/console/StatGraphs';
 import PowerButtons from '@/components/server/console/PowerButtons';
 import ServerDetailsBlock from '@/components/server/console/ServerDetailsBlock';
 import { Alert } from '@/components/elements/alert';
+import AnnounceBar from '@/components/elements/AnnounceBar';
 
 export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 
@@ -23,6 +24,7 @@ const ServerConsoleContainer = () => {
 
     return (
         <ServerContentBlock title={'Console'}>
+            <AnnounceBar displayLocation="console" />
             {(isNodeUnderMaintenance || isInstalling || isTransferring) && (
                 <Alert type={'warning'} className={'mb-4'}>
                     {isNodeUnderMaintenance

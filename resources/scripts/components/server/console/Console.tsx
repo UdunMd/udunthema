@@ -21,19 +21,19 @@ import 'xterm/css/xterm.css';
 import styles from './style.module.css';
 
 const theme = {
-    background: th`colors.black`.toString(),
+    background: '#09090b',
     cursor: 'transparent',
-    black: th`colors.black`.toString(),
+    black: '#09090b',
     red: '#E54B4B',
-    green: '#9ECE58',
+    green: '#4ade80',
     yellow: '#FAED70',
     blue: '#396FE2',
     magenta: '#BB80B3',
     cyan: '#2DDAFD',
-    white: '#d0d0d0',
+    white: '#a1a1aa',
     brightBlack: 'rgba(255, 255, 255, 0.2)',
     brightRed: '#FF5370',
-    brightGreen: '#C3E88D',
+    brightGreen: '#4ade80',
     brightYellow: '#FFCB6B',
     brightBlue: '#82AAFF',
     brightMagenta: '#C792EA',
@@ -63,6 +63,7 @@ export default () => {
     const unicode11Addon = new Unicode11Addon();
     const scrollDownHelperAddon = new ScrollDownHelperAddon();
     const { connected, instance } = ServerContext.useStoreState((state) => state.socket);
+    const status = ServerContext.useStoreState((state) => state.status.value);
     const [canSendCommands] = usePermissions(['control.console']);
     const serverId = ServerContext.useStoreState((state) => state.server.data!.id);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
@@ -199,10 +200,14 @@ export default () => {
     }, [connected, instance]);
 
     return (
-        <div className={classNames(styles.terminal, 'relative')}>
+        <div className={classNames(styles.terminal, 'relative rounded-lg overflow-hidden transition-all duration-500', {
+            'ring-1 ring-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.15)]': status === 'running',
+            'ring-1 ring-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.15)] animate-pulse': status === 'starting',
+            'ring-1 ring-white/5': status === 'offline' || status === 'stopping',
+        })}>
             <SpinnerOverlay visible={!connected} size={'large'} />
             <div
-                className={classNames(styles.container, styles.overflows_container, { 'rounded-b': !canSendCommands })}
+                className={classNames(styles.container, styles.overflows_container, 'bg-[#09090b]', { 'rounded-b': !canSendCommands })}
             >
                 <div className={'h-full'}>
                     <div id={styles.terminal} ref={ref} />

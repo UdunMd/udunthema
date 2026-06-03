@@ -65,7 +65,8 @@ const options: ChartOptions<'line'> = {
             radius: 0,
         },
         line: {
-            tension: 0.15,
+            tension: 0.4,
+            borderWidth: 2,
         },
     },
 };
@@ -92,7 +93,13 @@ function getEmptyData(label: string, sets = 1, callback?: ChartDatasetCallback |
                         label,
                         data: Array(20).fill(-5),
                         borderColor: theme('colors.cyan.400'),
-                        backgroundColor: hexToRgba(theme('colors.cyan.700'), 0.5),
+                        backgroundColor: (context: any) => {
+                            const ctx = context.chart.ctx;
+                            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                            gradient.addColorStop(0, hexToRgba(theme('colors.cyan.500'), 0.5));
+                            gradient.addColorStop(1, hexToRgba(theme('colors.cyan.500'), 0.0));
+                            return gradient;
+                        },
                     },
                     index
                 )
