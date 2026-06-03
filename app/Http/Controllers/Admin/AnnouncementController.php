@@ -55,7 +55,8 @@ class AnnouncementController extends Controller
 
         $data['created_by'] = $request->user()->id;
         $data['is_active'] = $request->has('is_active');
-        $data['target_display'] = json_encode($request->input('target_display', ['dashboard']));
+        $data['target_display'] = $request->input('target_display', ['dashboard']);
+        $data['expires_at'] = $request->input('expires_at') ?: null;
 
         Announcement::create($data);
 
