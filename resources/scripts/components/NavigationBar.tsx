@@ -107,13 +107,19 @@ const ServerSectionTitle = styled.button<{ $open: boolean }>`
 `;
 
 const SubMenuContainer = styled.div<{ $open: boolean }>`
-    ${tw`flex flex-col gap-1 overflow-hidden transition-all duration-500 ease-in-out`}
-    max-height: ${props => props.$open ? '800px' : '0'};
+    display: grid;
+    grid-template-rows: ${props => props.$open ? '1fr' : '0fr'};
+    transition: grid-template-rows 0.4s ease-in-out, opacity 0.4s ease-in-out, margin 0.4s ease-in-out;
     opacity: ${props => props.$open ? 1 : 0};
     margin-top: ${props => props.$open ? '0.5rem' : '0'};
-    padding-left: 0.5rem;
-    border-left: 2px solid rgba(255, 255, 255, 0.05);
-    margin-left: 1rem;
+
+    > div {
+        overflow: hidden;
+        ${tw`flex flex-col gap-1`}
+        padding-left: 0.5rem;
+        border-left: 2px solid rgba(255, 255, 255, 0.05);
+        margin-left: 1rem;
+    }
 `;
 
 const SimpleSectionTitle = styled.div`
@@ -227,36 +233,38 @@ export default () => {
                             </ServerSectionTitle>
                             
                             <SubMenuContainer $open={isServerMenuOpen}>
-                                <NavItem to={`/server/${serverId}`} exact>
-                                    <FontAwesomeIcon icon={faTerminal} css={tw`w-5`} /> Terminal
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/files`}>
-                                    <FontAwesomeIcon icon={faFolderOpen} css={tw`w-5`} /> File Manager
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/databases`}>
-                                    <FontAwesomeIcon icon={faDatabase} css={tw`w-5`} /> Databases
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/schedules`}>
-                                    <FontAwesomeIcon icon={faCalendarAlt} css={tw`w-5`} /> Schedules
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/users`}>
-                                    <FontAwesomeIcon icon={faUsers} css={tw`w-5`} /> Users
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/backups`}>
-                                    <FontAwesomeIcon icon={faCloudDownloadAlt} css={tw`w-5`} /> Backups
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/network`}>
-                                    <FontAwesomeIcon icon={faNetworkWired} css={tw`w-5`} /> Network
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/startup`}>
-                                    <FontAwesomeIcon icon={faBoxOpen} css={tw`w-5`} /> Startup
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/activity`}>
-                                    <FontAwesomeIcon icon={faHistory} css={tw`w-5`} /> Server Activity
-                                </NavItem>
-                                <NavItem to={`/server/${serverId}/settings`}>
-                                    <FontAwesomeIcon icon={faCogs} css={tw`w-5`} /> Settings
-                                </NavItem>
+                                <div>
+                                    <NavItem to={`/server/${serverId}`} exact>
+                                        <FontAwesomeIcon icon={faTerminal} css={tw`w-5`} /> Terminal
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/files`}>
+                                        <FontAwesomeIcon icon={faFolderOpen} css={tw`w-5`} /> File Manager
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/databases`}>
+                                        <FontAwesomeIcon icon={faDatabase} css={tw`w-5`} /> Databases
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/schedules`}>
+                                        <FontAwesomeIcon icon={faCalendarAlt} css={tw`w-5`} /> Schedules
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/users`}>
+                                        <FontAwesomeIcon icon={faUsers} css={tw`w-5`} /> Users
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/backups`}>
+                                        <FontAwesomeIcon icon={faCloudDownloadAlt} css={tw`w-5`} /> Backups
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/network`}>
+                                        <FontAwesomeIcon icon={faNetworkWired} css={tw`w-5`} /> Network
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/startup`}>
+                                        <FontAwesomeIcon icon={faBoxOpen} css={tw`w-5`} /> Startup
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/activity`}>
+                                        <FontAwesomeIcon icon={faHistory} css={tw`w-5`} /> Server Activity
+                                    </NavItem>
+                                    <NavItem to={`/server/${serverId}/settings`}>
+                                        <FontAwesomeIcon icon={faCogs} css={tw`w-5`} /> Settings
+                                    </NavItem>
+                                </div>
                             </SubMenuContainer>
                         </>
                     )}
