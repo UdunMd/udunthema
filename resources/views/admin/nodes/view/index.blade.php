@@ -188,6 +188,65 @@
 </div>
 
 <div class="row">
+    <div class="col-xs-12">
+        <div class="alx-card">
+            <div class="alx-card-header">
+                <h3 class="alx-card-title"><i class="fa fa-pie-chart"></i> Real-Time Resource Allocation</h3>
+            </div>
+            <div class="alx-card-body" style="padding: 30px 15px;">
+                <div style="display: flex; flex-wrap: nowrap; gap: 20px; overflow-x: auto; padding-bottom: 20px; -webkit-overflow-scrolling: touch;">
+                    {{-- CPU Chart --}}
+                    <div style="flex: 0 0 auto; width: 30%; min-width: 250px; text-align: center; margin: 0 auto;">
+                        <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 20px;">CPU Usage (%)</h4>
+                        <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+                            <canvas id="chartCpu"></canvas>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                <div id="cpuActiveText" style="font-size: 24px; font-weight: 700; color: #fff;">--%</div>
+                                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">Active</div>
+                            </div>
+                        </div>
+                        <p id="cpuSubText" style="margin-top: 15px; font-size: 13px; color: #94a3b8;">-- of -- Cores Allocated</p>
+                    </div>
+
+                    {{-- Memory Chart --}}
+                    <div style="flex: 0 0 auto; width: 30%; min-width: 250px; text-align: center; margin: 0 auto;">
+                        <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 20px;">Memory Usage (GiB)</h4>
+                        <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+                            <canvas id="chartMem"></canvas>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                <div id="memActiveText" style="font-size: 20px; font-weight: 700; color: #fff;">-- GiB</div>
+                                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">Active</div>
+                            </div>
+                        </div>
+                        <p id="memSubText" style="margin-top: 15px; font-size: 13px; color: #94a3b8;">-- allocated of {{ number_format($node->memory / 1024, 1) }} GiB Total</p>
+                    </div>
+
+                    {{-- Disk Chart --}}
+                    <div style="flex: 0 0 auto; width: 30%; min-width: 250px; text-align: center; margin: 0 auto;">
+                        <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 20px;">Disk Space Usage (GiB)</h4>
+                        <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+                            <canvas id="chartDisk"></canvas>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                <div id="diskActiveText" style="font-size: 20px; font-weight: 700; color: #fff;">-- GiB</div>
+                                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">Active</div>
+                            </div>
+                        </div>
+                        <p id="diskSubText" style="margin-top: 15px; font-size: 13px; color: #94a3b8;">-- allocated of {{ number_format($node->disk / 1024, 1) }} GiB Total</p>
+                    </div>
+                </div>
+
+                {{-- Status Widget --}}
+                <div style="margin-top: 40px; padding: 20px; background: rgba(15,23,42,0.6); border: 1px solid rgba(99,102,241,0.2); border-radius: 12px; text-align: center;">
+                    <h4 style="margin: 0; color: #94a3b8; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Remaining Physical Disk Space</h4>
+                    <div id="diskRemaining" style="font-size: 28px; font-weight: 700; color: #4ade80; margin-top: 8px;">-- GiB</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 5px;">(Total Node Capacity minus Real-Time Active Usage)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     {{-- LEFT COL ─ System Info --}}
     <div class="col-sm-8">
         {{-- System Information --}}
@@ -221,6 +280,19 @@
             </table>
         </div>
 
+        {{-- Description --}}
+        @if ($node->description)
+            <div class="alx-desc-card">
+                <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:#64748b; margin-bottom:10px">
+                    <i class="fa fa-align-left" style="margin-right:5px"></i>Description
+                </div>
+                <pre>{{ $node->description }}</pre>
+            </div>
+        @endif
+    </div>
+
+    {{-- RIGHT COL ─ Servers & Delete --}}
+    <div class="col-sm-4">
         {{-- Servers & Status --}}
         <div class="alx-card" style="margin-bottom: 20px;">
             <div class="alx-card-header">
@@ -240,15 +312,23 @@
             </div>
         </div>
 
-        {{-- Description --}}
-        @if ($node->description)
-            <div class="alx-desc-card">
-                <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:#64748b; margin-bottom:10px">
-                    <i class="fa fa-align-left" style="margin-right:5px"></i>Description
-                </div>
-                <pre>{{ $node->description }}</pre>
+        {{-- Delete --}}
+        <div class="alx-danger-card">
+            <div class="alx-danger-header"><i class="fa fa-trash"></i> Danger Zone — Delete Node</div>
+            <div class="alx-danger-body">
+                Deleting a node is <strong>irreversible</strong> and will immediately remove this node from the panel.
+                There must be <strong>no servers</strong> associated with this node before proceeding.
             </div>
-        @endif
+            <div class="alx-danger-footer">
+                <form action="{{ route('admin.nodes.view.delete', $node->id) }}" method="POST">
+                    {!! csrf_field() !!}
+                    {!! method_field('DELETE') !!}
+                    <button type="submit" class="alx-btn-danger" {{ ($node->servers_count < 1) ?: 'disabled' }}>
+                        <i class="fa fa-trash"></i> Delete This Node
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
