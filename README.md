@@ -55,14 +55,23 @@ The interactive installer will guide you through:
 
 ## 🔄 Updating Alxzen Panel
 
-If you already have Alxzen Panel installed and want to update to the latest version without losing your data, simply run this command in your terminal:
+If you already have Alxzen Panel installed and want to update to the latest version without losing your data:
 
 ```bash
-cd /var/www/pterodactyl && php artisan down
-curl -L https://github.com/alxzy-group/alxzen/releases/latest/download/panel.tar.gz | tar -xzv
+cd /var/www/pterodactyl
+php artisan down
+
+# Download & extract latest release
+curl -Lo /tmp/panel.tar.gz https://github.com/alxzy-group/alxzen/releases/latest/download/panel.tar.gz
+tar -xzf /tmp/panel.tar.gz
+rm -f /tmp/panel.tar.gz
+
+# Clear caches & set permissions
 php artisan view:clear && php artisan config:clear
 chown -R www-data:www-data /var/www/pterodactyl/*
-chown -R www-data:www-data /var/www/pterodactyl/.*
+chown -R www-data:www-data /var/www/pterodactyl/.[!.]*
+
+# Bring panel back online
 php artisan up
 ```
 
@@ -560,7 +569,17 @@ systemctl restart nginx
 
 ## 📝 Changelog
 
-### v3.1 — Complete Installer Overhaul
+### v3.5 — Branding & Admin UI Overhaul
+- **feat:** Dynamic Company Name — login page title updates from Admin Settings
+- **feat:** Configurable Logo URL in Admin Settings for login page branding
+- **feat:** Premium redesigned Server, User, and Node admin list views
+- **feat:** KDE Plasma-inspired Node overview with resource grid cards & shimmer progress bars
+- **fix:** `cron` added to setup dependencies (fixes Debian minimal install)
+- **fix:** DB user drop+recreate on install (fixes password mismatch on reinstall)
+- **fix:** crontab pipe replaced with temp file (fixes `/dev/fd/63` error in bash process substitution)
+- **fix:** Composer `--no-security-blocking` for compatibility with Composer 2.10.x
+
+### v3.4 — UI Polish & Dropdown Fix
 - **feat:** Complete interactive installer with menu system (Panel/Wings/Both/Uninstall)
 - **feat:** Full Nginx virtual host configuration (HTTP & HTTPS)
 - **feat:** Let's Encrypt SSL integration via Certbot

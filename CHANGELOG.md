@@ -3,6 +3,24 @@ This file is a running track of new features and fixes to each version of the pa
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
+## v3.5 (Branding & Admin UI Overhaul)
+### Added
+* **Configurable Panel Name** — Company Name changed in Admin → Settings now dynamically updates the login page title in real-time. Last word of the name is automatically highlighted with the indigo/purple gradient.
+* **Custom Logo URL** — New "Panel Logo URL" field in Admin → Settings allows setting a custom logo image for the login page. Falls back to default logo if empty or URL fails to load.
+* **Premium Admin Server List** — Completely redesigned server list with dark glassmorphism card, status badges (Active/Suspended/Installing with icons), monospace UUID preview, neon action buttons.
+* **Premium Admin User List** — Redesigned user list with Gravatar avatars, gold "Admin" badge, lock/unlock 2FA icons, server count stat pills.
+* **Premium Admin Node List** — Redesigned node list with live status dot indicator (green=online, red=offline), memory/disk displayed in GiB, SSL and public icons with tooltips, maintenance badge.
+* **KDE Plasma-Inspired Node Overview** — Node detail page revamped with 2×2 resource grid (Disk, Memory with shimmer progress bars, Servers count, Node Status), custom tab bar, system info table with live "Online" badge.
+
+### Fixed
+* **Critical:** `cron` package now included in system dependencies during setup — fixes `crontab: command not found` error on minimal Debian installations.
+* **Critical:** Database user is now dropped and recreated during install (not `IF NOT EXISTS`) — fixes password mismatch error when reinstalling on a server with leftover DB user.
+* **Critical:** All `crontab -` pipe commands replaced with temp file approach — fixes `/dev/fd/63` error when running setup script via `bash <(curl ...)`.
+* `--no-security-blocking` flag used instead of `--no-audit` for Composer compatibility with version 2.10.x.
+* `app:logo` setting now registered in `SettingsServiceProvider` so DB value persists across restarts.
+
+---
+
 ## v3.4 (alxzen UI Polish & Dropdown Fix)
 ### Added
 * Server-specific **Management Console** dropdown in the left sidebar using accordion-style animation, replacing the old always-expanded flat list.
