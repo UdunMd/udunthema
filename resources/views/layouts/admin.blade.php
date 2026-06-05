@@ -61,33 +61,130 @@
                 text-shadow: 0 0 10px rgba(162, 155, 254, 0.2);
             }
 
-            /* 5. Box / Panel (Modern Dark) */
+            /* 5. Box / Panel (Modern Dark KDE Plasma) */
             .box {
-                background: #1a1a20 !important;
-                border-top: 3px solid #6c5ce7 !important; /* Border atas Ungu */
-                border-radius: 8px !important;
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+                border: 1px solid rgba(99, 102, 241, 0.2) !important;
+                border-radius: 12px !important;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
                 color: #ffffff !important;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+                overflow: hidden !important;
+                margin-bottom: 20px;
             }
             .box-header {
                 color: #ffffff !important;
-                font-weight: 700 !important;
+                padding: 18px 24px !important;
+                border-bottom: 1px solid rgba(99, 102, 241, 0.15) !important;
+                background: rgba(99, 102, 241, 0.05) !important;
+            }
+            .box-title {
+                font-size: 15px !important;
+                font-weight: 600 !important;
+                color: #e2e8f0 !important;
+                letter-spacing: 0.3px;
+            }
+            .box-body { padding: 20px !important; }
+            .box-footer {
+                background: rgba(15, 23, 42, 0.6) !important;
+                border-top: 1px solid rgba(99,102,241,0.2) !important;
+                padding: 15px 20px !important;
             }
 
-            /* 6. Tombol & Badge (Tebal) */
+            /* 6. Forms & Inputs (Glassmorphism) */
+            .form-control {
+                background: rgba(15, 23, 42, 0.6) !important;
+                border: 1px solid rgba(99,102,241,0.3) !important;
+                border-radius: 8px !important;
+                color: #cbd5e1 !important;
+                transition: all 0.2s;
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.1) !important;
+            }
+            .form-control:focus {
+                border-color: #818cf8 !important;
+                box-shadow: 0 0 0 3px rgba(129,140,248,0.15) !important;
+                background: rgba(15, 23, 42, 0.8) !important;
+                outline: none;
+            }
+            .form-control[disabled], .form-control[readonly] {
+                background: rgba(0,0,0,0.2) !important;
+                color: #64748b !important;
+                cursor: not-allowed;
+            }
+            .input-group-addon {
+                background: rgba(99,102,241,0.1) !important;
+                border: 1px solid rgba(99,102,241,0.3) !important;
+                color: #818cf8 !important;
+                border-radius: 8px 0 0 8px !important;
+            }
+            label { color: #94a3b8 !important; font-weight: 600 !important; font-size: 13px !important; }
+
+            /* 7. Tables (Modern Dark) */
+            .table { border-collapse: collapse !important; width: 100% !important; margin-bottom: 0 !important; }
+            .table > thead > tr > th {
+                background: rgba(15, 23, 42, 0.6) !important;
+                border-bottom: 1px solid rgba(99,102,241,0.2) !important;
+                padding: 12px 20px !important;
+                font-size: 11px !important;
+                font-weight: 600 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.8px !important;
+                color: #64748b !important;
+            }
+            .table > tbody > tr > td {
+                border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+                border-top: none !important;
+                padding: 14px 20px !important;
+                font-size: 13px !important;
+                color: #cbd5e1 !important;
+                vertical-align: middle !important;
+            }
+            .table-hover > tbody > tr:hover { background: rgba(99,102,241,0.06) !important; }
+
+            /* 8. Tombol & Badge (Neon & Gradient) */
             .btn {
-                font-weight: 700 !important;
-                border-radius: 5px !important;
-                text-transform: uppercase;
-                font-size: 11px;
+                font-weight: 600 !important;
+                border-radius: 6px !important;
+                font-size: 12px !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.5px !important;
+                transition: all 0.2s !important;
+                border: none !important;
+                padding: 8px 16px !important;
             }
             .btn-primary {
-                background-color: #6c5ce7 !important;
-                border-color: #6c5ce7 !important;
+                background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+                color: #fff !important;
+                box-shadow: 0 2px 10px rgba(99,102,241,0.3) !important;
             }
-            .label {
-                font-weight: 700 !important;
+            .btn-primary:hover {
+                transform: translateY(-1px) !important;
+                box-shadow: 0 4px 15px rgba(99,102,241,0.5) !important;
             }
+            .btn-success {
+                background: linear-gradient(135deg, #10b981, #059669) !important;
+                color: #fff !important;
+                box-shadow: 0 2px 10px rgba(16,185,129,0.3) !important;
+            }
+            .btn-danger {
+                background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+                color: #fff !important;
+                box-shadow: 0 2px 10px rgba(239,68,68,0.3) !important;
+            }
+            .btn-warning {
+                background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+                color: #fff !important;
+            }
+            .btn-default {
+                background: rgba(255,255,255,0.05) !important;
+                color: #cbd5e1 !important;
+                border: 1px solid rgba(255,255,255,0.1) !important;
+            }
+            .btn-default:hover { background: rgba(255,255,255,0.1) !important; }
+            .label { font-weight: 700 !important; border-radius: 4px !important; padding: 3px 8px !important; }
+            .label-primary { background: rgba(99,102,241,0.2) !important; color: #818cf8 !important; border: 1px solid rgba(99,102,241,0.4) !important; }
+            .label-success { background: rgba(16,185,129,0.2) !important; color: #34d399 !important; border: 1px solid rgba(16,185,129,0.4) !important; }
+            .label-danger { background: rgba(239,68,68,0.2) !important; color: #f87171 !important; border: 1px solid rgba(239,68,68,0.4) !important; }
+            .label-warning { background: rgba(245,158,11,0.2) !important; color: #fbbf24 !important; border: 1px solid rgba(245,158,11,0.4) !important; }
 
             /* Footer */
             .main-footer {
@@ -95,6 +192,15 @@
                 border-top: 1px solid #1a1a20 !important;
                 color: #555 !important;
             }
+
+            /* Breadcrumb / Page Header */
+            .content-header > .breadcrumb {
+                background: rgba(15, 23, 42, 0.6) !important;
+                border: 1px solid rgba(99,102,241,0.1) !important;
+                border-radius: 20px !important;
+            }
+            .content-header > .breadcrumb > li > a { color: #818cf8 !important; }
+            .content-header > .breadcrumb > .active { color: #94a3b8 !important; }
         </style>
     </head>
 
