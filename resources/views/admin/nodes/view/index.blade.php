@@ -258,10 +258,10 @@
             <div class="alx-card-header">
                 <h3 class="alx-card-title"><i class="fa fa-pie-chart"></i> Real-Time Resource Allocation</h3>
             </div>
-            <div class="alx-card-body" style="padding: 30px;">
-                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+            <div class="alx-card-body" style="padding: 30px 15px;">
+                <div style="display: flex; flex-wrap: nowrap; gap: 20px; overflow-x: auto; padding-bottom: 20px; -webkit-overflow-scrolling: touch;">
                     {{-- CPU Chart --}}
-                    <div style="width: 30%; min-width: 250px; text-align: center;">
+                    <div style="flex: 0 0 auto; width: 30%; min-width: 250px; text-align: center; margin: 0 auto;">
                         <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 20px;">CPU Usage (%)</h4>
                         <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
                             <canvas id="chartCpu"></canvas>
@@ -274,7 +274,7 @@
                     </div>
 
                     {{-- Memory Chart --}}
-                    <div style="width: 30%; min-width: 250px; text-align: center;">
+                    <div style="flex: 0 0 auto; width: 30%; min-width: 250px; text-align: center; margin: 0 auto;">
                         <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 20px;">Memory Usage (GiB)</h4>
                         <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
                             <canvas id="chartMem"></canvas>
@@ -287,7 +287,7 @@
                     </div>
 
                     {{-- Disk Chart --}}
-                    <div style="width: 30%; min-width: 250px; text-align: center;">
+                    <div style="flex: 0 0 auto; width: 30%; min-width: 250px; text-align: center; margin: 0 auto;">
                         <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 20px;">Disk Space Usage (GiB)</h4>
                         <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
                             <canvas id="chartDisk"></canvas>
