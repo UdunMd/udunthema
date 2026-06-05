@@ -4,6 +4,8 @@ import styled from 'styled-components/macro';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import tw from 'twin.macro';
 import { motion } from 'framer-motion';
+import { useStoreState } from 'easy-peasy';
+import { ApplicationStore } from '@/state';
 
 type Props = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> & {
     title?: string;
@@ -49,55 +51,84 @@ const FormWrapper = styled(motion.div)`
     ${tw`w-full max-w-sm`}
 `;
 
-export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => (
-    <SplitLayout>
-        <LeftPanel>
-            <BrandTitle
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-                AlxZen <span>Panel</span>
-            </BrandTitle>
-            <BrandSlogan
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            >
-                Elevate Your Infrastructure. Deploy, manage, and scale your game servers with enterprise-grade control.
-            </BrandSlogan>
-        </LeftPanel>
+const LoginFormContainer = forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => {
+    const name = useStoreState((state: ApplicationStore) => state.settings.data?.name ?? 'AlxZen Panel');
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data?.logo ?? '');
 
-        <RightPanel>
-            <FormWrapper
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-                <div css={tw`mb-10 text-center lg:text-left`}>
-                    <img src={'/assets/svgs/pterodactyl.svg'} css={tw`block w-16 mb-6 mx-auto lg:mx-0`} alt="Logo" />
-                    {title && <h2 css={tw`text-3xl font-bold tracking-tight text-white`}>{title}</h2>}
-                    <p css={tw`text-gray-400 mt-2 text-sm`}>Welcome back! Please enter your details.</p>
-                </div>
+    // Split name: last word becomes the highlighted span, rest is plain text
+    const nameParts = name.trim().split(' ');
+    const highlight = nameParts.length > 1 ? nameParts.pop() : undefined;
+    const mainText = nameParts.join(' ');
 
-                <FlashMessageRender css={tw`mb-6`} />
+    return (
+        <SplitLayout>
+            <LeftPanel>
+                <BrandTitle
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
+                    {highlight ? (
+                        <>{mainText} <span>{highlight}</span></>
+                    ) : (
+                        <span>{mainText}</span>
+                    )}
+                </BrandTitle>
+                <BrandSlogan
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+                >
+                    Elevate Your Infrastructure. Deploy, manage, and scale your game servers with enterprise-grade control.
+                </BrandSlogan>
+            </LeftPanel>
 
-                <Form {...props} ref={ref}>
-                    {props.children}
-                </Form>
+            <RightPanel>
+                <FormWrapper
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                >
+                    <div css={tw`mb-10 text-center lg:text-left`}>
+                        {logo ? (
+                            <img
+                                src={logo}
+                                css={tw`block h-12 mb-6 mx-auto lg:mx-0 object-contain`}
+                                alt={`${name} Logo`}
+                                onError={(e) => {
+                                    (e.target as HTMLImageElement).style.display = 'none';
+                                }}
+                            />
+                        ) : (
+                            <img src={'/assets/svgs/pterodactyl.svg'} css={tw`block w-16 mb-6 mx-auto lg:mx-0`} alt={'Logo'} />
+                        )}
+                        {title && <h2 css={tw`text-3xl font-bold tracking-tight text-white`}>{title}</h2>}
+                        <p css={tw`text-gray-400 mt-2 text-sm`}>Welcome back! Please enter your details.</p>
+                    </div>
 
-                <p css={tw`text-center text-gray-500 text-xs mt-12`}>
-                    &copy; 2015 - {new Date().getFullYear()}&nbsp;
-                    <a
-                        rel={'noopener nofollow noreferrer'}
-                        href={'https://github.com/alxzy-group/alxzen'}
-                        target={'_blank'}
-                        css={tw`no-underline text-indigo-400 hover:text-indigo-300 transition-colors`}
-                    >
-                        alxzen Software
-                    </a>
-                </p>
-            </FormWrapper>
-        </RightPanel>
-    </SplitLayout>
-));
+                    <FlashMessageRender css={tw`mb-6`} />
+
+                    <Form {...props} ref={ref}>
+                        {props.children}
+                    </Form>
+
+                    <p css={tw`text-center text-gray-500 text-xs mt-12`}>
+                        &copy; 2015 - {new Date().getFullYear()}&nbsp;
+                        <a
+                            rel={'noopener nofollow noreferrer'}
+                            href={'https://github.com/alxzy-group/alxzen'}
+                            target={'_blank'}
+                            css={tw`no-underline text-indigo-400 hover:text-indigo-300 transition-colors`}
+                        >
+                            alxzen Software
+                        </a>
+                    </p>
+                </FormWrapper>
+            </RightPanel>
+        </SplitLayout>
+    );
+});
+
+LoginFormContainer.displayName = 'LoginFormContainer';
+
+export default LoginFormContainer;

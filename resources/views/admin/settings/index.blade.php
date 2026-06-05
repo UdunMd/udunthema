@@ -32,6 +32,13 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
+                                <label class="control-label">Panel Logo URL</label>
+                                <div>
+                                    <input type="url" class="form-control" name="app:logo" value="{{ old('app:logo', config('app.logo')) }}" placeholder="https://example.com/logo.png" />
+                                    <p class="text-muted"><small>URL gambar logo yang ditampilkan di halaman login. Kosongkan untuk pakai logo default.</small></p>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label class="control-label">Require 2-Factor Authentication</label>
                                 <div>
                                     <div class="btn-group" data-toggle="buttons">
