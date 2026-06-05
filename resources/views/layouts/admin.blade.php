@@ -117,7 +117,11 @@
         <div class="wrapper">
             <header class="main-header">
                 <a href="{{ route('index') }}" class="logo">
-                    <span>{{ config('app.name', 'alxzen') }}</span>
+                    @if(config('app.logo'))
+                        <img src="{{ config('app.logo') }}" alt="Logo" style="max-height: 35px; max-width: 100%; vertical-align: middle;">
+                    @else
+                        <span>{{ config('app.name', 'alxzen') }}</span>
+                    @endif
                 </a>
                 <nav class="navbar navbar-static-top">
                     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
