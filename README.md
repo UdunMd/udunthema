@@ -31,7 +31,7 @@
 Run this one-liner as **root** on a **fresh** Ubuntu/Debian server:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/alxzy-group/alxzen/main/setup.sh)
+bash <(curl -s https://raw.githubusercontent.com/UdunMd/udunthema/main/setup.sh)
 ```
 
 The interactive installer will guide you through:
