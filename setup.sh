@@ -1,11 +1,11 @@
 #!/bin/bash
 # ==============================================================================
-# Alxzen Panel & Wings — Automated Installer Script
+# Udun Panel & Wings — Automated Installer Script
 # Inspired by pterodactyl-installer (Bird)
 # Supported OS: Ubuntu 20.04/22.04/24.04, Debian 11/12/13
 #
 # Copyright © 2024-2026 alxzy-group
-# https://github.com/alxzy-group/alxzen
+# https://github.com/UdunMd/Udunthema
 # ==============================================================================
 
 set -e
@@ -25,11 +25,11 @@ NC='\033[0m'
 PANEL_DIR="/var/www/pterodactyl"
 WINGS_DIR="/etc/pterodactyl"
 WINGS_BIN="/usr/local/bin/wings"
-GITHUB_PANEL="https://github.com/UdunMd/udunthema"
+GITHUB_PANEL="https://github.com/UdunMd/Udunthema"
 GITHUB_WINGS="https://github.com/alxzy-group/wings"
 GITHUB_PANEL_DL="${GITHUB_PANEL}/releases/latest/download/panel.tar.gz"
 GITHUB_WINGS_DL="${GITHUB_WINGS}/releases/latest/download/wings_linux_amd64"
-# Fallback to official Pterodactyl wings if alxzen wings release is not available
+# Fallback to official Pterodactyl wings if Udun wings release is not available
 OFFICIAL_WINGS_DL="https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_amd64"
 
 OS=""
@@ -54,7 +54,7 @@ print_header() {
     echo "    ║       ██║  ██║███████╗██╔╝ ██╗███████╗███████╗██║ ╚██║║"
     echo "    ║       ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚╝║"
     echo "    ║                                                      ║"
-    echo "    ║         Alxzen Panel & Wings — Auto Installer        ║"
+    echo "    ║         Udun Panel & Wings — Auto Installer        ║"
     echo "    ║              © 2024-2026 alxzy-group                 ║"
     echo "    ║                                                      ║"
     echo "    ╚══════════════════════════════════════════════════════╝"
@@ -252,7 +252,7 @@ MYSQL_SCRIPT
 }
 
 download_panel() {
-    print_step "Downloading Alxzen Panel"
+    print_step "Downloading Udun Panel"
 
     mkdir -p "$PANEL_DIR"
     cd "$PANEL_DIR"
@@ -349,9 +349,9 @@ configure_queue_worker() {
     print_step "Configuring Queue Worker (pteroq.service)"
 
     cat > /etc/systemd/system/pteroq.service <<'SYSTEMD_UNIT'
-# Alxzen Panel Queue Worker
+# Udun Panel Queue Worker
 [Unit]
-Description=Alxzen Panel Queue Worker
+Description=Udun Panel Queue Worker
 After=redis-server.service
 
 [Service]
@@ -587,15 +587,15 @@ install_docker() {
 }
 
 install_wings_binary() {
-    print_step "Downloading Alxzen Wings"
+    print_step "Downloading Udun Wings"
 
     mkdir -p "$WINGS_DIR"
 
-    # Try alxzen wings first, fallback to official
+    # Try Udun wings first, fallback to official
     if curl -L --fail -o "$WINGS_BIN" "$GITHUB_WINGS_DL" 2>/dev/null; then
-        print_ok "Downloaded Alxzen Wings fork."
+        print_ok "Downloaded Udun Wings fork."
     elif curl -L --fail -o "$WINGS_BIN" "$OFFICIAL_WINGS_DL" 2>/dev/null; then
-        print_warn "Alxzen Wings release not found. Using official Pterodactyl Wings."
+        print_warn "Udun Wings release not found. Using official Pterodactyl Wings."
     else
         print_err "Failed to download Wings binary. Please check your internet connection."
     fi
@@ -804,7 +804,7 @@ update_panel() {
     print_header
     echo -e "  ${YELLOW}${BOLD}🔄 UPDATE PANEL${NC}"
     echo ""
-    print_info "Updating Alxzen Panel..."
+    print_info "Updating Udun Panel..."
     
     cd "$PANEL_DIR"
     php artisan down
@@ -880,7 +880,7 @@ install_panel() {
     echo ""
     echo -e "  ${GREEN}${BOLD}╔══════════════════════════════════════════════════════╗${NC}"
     echo -e "  ${GREEN}${BOLD}║                                                      ║${NC}"
-    echo -e "  ${GREEN}${BOLD}║     ✓  Alxzen Panel Installation Complete!           ║${NC}"
+    echo -e "  ${GREEN}${BOLD}║     ✓  Udun Panel Installation Complete!           ║${NC}"
     echo -e "  ${GREEN}${BOLD}║                                                      ║${NC}"
     echo -e "  ${GREEN}${BOLD}╚══════════════════════════════════════════════════════╝${NC}"
     echo ""
@@ -949,7 +949,7 @@ install_wings() {
     echo ""
     echo -e "  ${GREEN}${BOLD}╔══════════════════════════════════════════════════════╗${NC}"
     echo -e "  ${GREEN}${BOLD}║                                                      ║${NC}"
-    echo -e "  ${GREEN}${BOLD}║     ✓  Alxzen Wings Installation Complete!           ║${NC}"
+    echo -e "  ${GREEN}${BOLD}║     ✓  Udun Wings Installation Complete!           ║${NC}"
     echo -e "  ${GREEN}${BOLD}║                                                      ║${NC}"
     echo -e "  ${GREEN}${BOLD}╚══════════════════════════════════════════════════════╝${NC}"
     echo ""
@@ -994,7 +994,7 @@ install_both() {
     echo ""
     echo -e "  ${GREEN}${BOLD}╔══════════════════════════════════════════════════════╗${NC}"
     echo -e "  ${GREEN}${BOLD}║                                                      ║${NC}"
-    echo -e "  ${GREEN}${BOLD}║   ✓  Alxzen Panel + Wings — Fully Installed!        ║${NC}"
+    echo -e "  ${GREEN}${BOLD}║   ✓  Udun Panel + Wings — Fully Installed!        ║${NC}"
     echo -e "  ${GREEN}${BOLD}║                                                      ║${NC}"
     echo -e "  ${GREEN}${BOLD}╚══════════════════════════════════════════════════════╝${NC}"
     echo ""
