@@ -26,7 +26,7 @@ PANEL_DIR="/var/www/pterodactyl"
 WINGS_DIR="/etc/pterodactyl"
 WINGS_BIN="/usr/local/bin/wings"
 GITHUB_PANEL="https://github.com/UdunMd/udunthema"
-GITHUB_WINGS="https://github.com/alxzy-group/wings"
+GITHUB_WINGS="https://github.com/UdunMd/wings"
 GITHUB_PANEL_DL="${GITHUB_PANEL}/releases/latest/download/panel.tar.gz"
 GITHUB_WINGS_DL="${GITHUB_WINGS}/releases/latest/download/wings_linux_amd64"
 # Fallback to official Pterodactyl wings if Udun wings release is not available
